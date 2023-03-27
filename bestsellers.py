@@ -1,3 +1,9 @@
+'''
+Kevn Collura
+Best Sellers
+'''
+
+
 def main():
     try:
         booklist = create_booklist()
@@ -11,7 +17,7 @@ def create_booklist():
         for line in f:
             title, author, publisher, date, category = line.strip().split("\t")
             year, month, _ = date.split("/")
-            booklist.append((title, author, publisher, int(year), int(month), category))
+            booklist.append((title, author , str(date), int(year), int(month)))
     return booklist
 
 def display_books(books):
@@ -19,7 +25,7 @@ def display_books(books):
         print("No books found.")
     else:
         for book in books:
-            print(f"{book[0]} by {book[1]} ({book[3]}/{book[4]}, {book[5]})")
+            print(f"{book[0]} by {book[1]} (pub date: {book[2]})")
 
 def menu(booklist):
     while True:
@@ -35,7 +41,7 @@ def menu(booklist):
         if choice == "1":
             start_year = int(input("Enter starting year: "))
             end_year = int(input("Enter ending year: "))
-            books = [book for book in booklist if start_year <= book[3] <= end_year]
+            books = [book for book in booklist if start_year >= book[3] <= end_year]
             display_books(books)
 
         elif choice == "2":
